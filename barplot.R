@@ -14,7 +14,7 @@ my_table <- read.csv("barplot.csv")
 
 # plot----
 
-ggplot(my_table, aes(y= age, x= name, fill=name))+
+ggplot(my_table, aes(y= age, x= name, fill=name))+ # name of x and y are taken from the data file
   geom_bar(stat = 'identity')
 
 # ggplot is the tool box to make graph given by the big tool box (tidyverse)

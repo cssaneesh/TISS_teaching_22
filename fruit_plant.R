@@ -1,61 +1,127 @@
 
 plants <- read.csv("fruiting_plants.csv")
 
+View(plants)
+
 library(tidyverse)
 
-glimpse(fruiting_plants)
+glimpse(plants)
 
 # View(plants)
 names(plants) %>% tibble()
 
+# clean names----
+
 # let us clean column titles
+
+# install.packages('janitor')
 
 library(janitor)
 
-plants <- plants %>% clean_names() # %>% view()
+plants <- plants %>% clean_names()
 
 names(plants) %>% tibble()
 
 # If you want use clean_names later save it 
 
 # view(plants)
+# case change----
+glimpse(plants)
+plants$common_name # notice that some names are in lower case, ideally a name should be in uppercase
+plants %>% select(common_name)# notice that some names are in lower case, ideally a name should be in uppercase
 
+# to do this, stringr has a function, install stringr, remove the hash that is before install.package()
+# install.packages('stringr') 
 
 library(stringr)
-
-#plants <- plants %>% 
+plants <- plants %>% 
   mutate(common_name = ifelse(str_detect(common_name, "^[:upper:]+$"), 
                               common_name, str_to_title(common_name)))
 
-# plants <- plants %>% 
-    mutate(demand_in_the_market = ifelse(str_detect(demand_in_the_market, "^[:upper:]+$"), 
-                                         demand_in_the_market, str_to_title(demand_in_the_market)))  
+# homework-----
 
-plants <- plants %>% 
-  mutate(have_you_seen_this_plant = ifelse(str_detect(have_you_seen_this_plant, "^[:upper:]+$"), 
-                                           have_you_seen_this_plant, str_to_title(have_you_seen_this_plant)))
-  
-View(plants)
+# do the above for demand_in_the_market, 
+View(plants) # see if it has changed
+
+# do the above for have_you_seen_this_plant
+
+View(plants) # see if it has changed
 
 # recode----
-
-# if you notice height it is dbl but not clean first
-
 plants %>% select(scientific_name )
 
 # the way scientific names are written is as follows: Homo sapiens, Panthera tigris, Elephas maximus
+# genus uppercase and species lowercase
+# recode (x, oldname = newname)
 
-plants <- plants %>% mutate(scientific_name=recode(scientific_name,'Prunusavium'= 'Prunus avium'))%>% 
-  view()
+plants <- plants %>% mutate(scientific_name=recode(scientific_name,'Prunusavium'= 'Prunus avium'))
+plants %>% select(scientific_name )
 
-# plants <- plants %>% mutate(scientific_name=recode(scientific_name,'Ficuscarica'= 'Ficus carica')) %>% view()
+# homework----
+# recode Ficuscarica give a space between Ficus carica
+plants %>% select(scientific_name)
+# recode Vitis Vinifera, species to lowercase 
+plants %>% select(scientific_name)
 
-# plants <- plants %>% mutate(scientific_name=recode(scientific_name,'Vitis Vinifera'= 'Vitis vinifera')) %>% view()
+# height----
+# there are a lots of mistakes, take care while you enter data
+plants <- plants %>% mutate(height_in_m= recode(height_in_m, 
+                                      '40'= 40,
+                                      '6'= 6,
+                                      "8-10" = 9,
+                                      '5-10' =7.5,
+                                      '5-10' =7.5,
+                                      "More than 10" =10,
+                                      "15 to 20"= 17.5,
+                                      'upto 11'= 11,
+                                      "10 to 12"= 11,
+                                      'upto 14'= 14,
+                                      "6-25" = 15.5,
+                                      "15-20" = 17.5,
+                                      "4.5-10"= 7.5,
+                                     "upto 30"= 30,
+                                     "upto 30"= 30,
+                                     "13"= 13, "10"=10
+                                      )) 
+# It is good to change data in the csv file rather than doing like this !!!
 
-# It is good to have some variables as factors
+plants %>% select(height_in_m)
+typeof(plants$height_in_m)
+glimpse(plants) # note that height_in_m was character now it is a dbl or numeric value
+
+# circumference----
+plants %>% select(common_name, trunk_circumference_in_m )
+
+# there are lot of NA and wrong entries so I manually changed in the csv file
+
+# factors----
+glimpse(plants)
 is.factor(plants$demand_in_the_market)
+is.factor(plants$have_you_seen_this_plant)
+# demand_in_the_market and have_you_seen_this_plant can be ordered if we want
+# to do that we need to convert the values as factors 
+plants <- plants %>% mutate(demand_in_the_market= as.factor(demand_in_the_market))
 
+# following is the base r way of converting character as factor
 plants$have_you_seen_this_plant <- as.factor(plants$have_you_seen_this_plant)
+
+is.factor(plants$demand_in_the_market)
+is.factor(plants$have_you_seen_this_plant)
+
+levels(plants$demand_in_the_market) # because r is case sensitive (upper and lower)
+levels(plants$have_you_seen_this_plant)
+
+plants <- plants %>% mutate(demand_in_the_market=toupper(demand_in_the_market))
+plants <- plants %>% mutate(have_you_seen_this_plant=toupper(have_you_seen_this_plant))
+
+levels(plants$demand_in_the_market)
+levels(plants$have_you_seen_this_plant)
+
+plants <- plants %>% mutate(demand_in_the_market= as.factor(demand_in_the_market))
+plants <- plants %>% mutate(have_you_seen_this_plant= as.factor(have_you_seen_this_plant))
+
+levels(plants$demand_in_the_market)
+levels(plants$have_you_seen_this_plant)
 
 plants %>% 
     select(common_name)

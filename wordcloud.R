@@ -16,6 +16,7 @@ library(wordcloud)
 par(bg="black") 
 set.seed(3)
 # before you plot, make sure that the plot window or Plot pane is maximized!! 
+# click on the rectangular button on top of the File, Plots, Packages window
 wordcloud(words = test$community, freq = test$N, max.words = 92,
           colors = brewer.pal(8, 'Dark2'))
 

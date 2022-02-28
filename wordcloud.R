@@ -13,7 +13,7 @@ max(test$N) # copy this number for max.words=
 
 # wordcloud----
 library(wordcloud)
-par(bg="lightgreen") 
+par(bg="black") 
 set.seed(3)
 # before you plot, make sure that the plot window or Plot pane is maximized!! 
 wordcloud(words = test$community, freq = test$N, max.words = 92,

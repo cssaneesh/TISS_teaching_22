@@ -1,37 +1,34 @@
-community,N
-types,1
-same,3
-using,5
-variable,7
-arguments,4
-continuous,6
-different,8
-list,9
-possible,10
-predefined,10
-such,12
-gradient,15
-robust,19
-show,19
-scale,20
-change,21
-viridis,21
-manually,23
-options,31
-friendly,32
-group,32
-modify,32
-color,43
-create,43
-palette,43
-color-blind,45
-fill,45
-mapped,45
-provide,45
-default,54
-function,54
-custom,56
-known,65
-makes,76
-packages,76
-ggplot2,92
+courses,topic
+Critical Reasoning and Logic (Science),Philosphy
+Data Science with R: Advanced,R
+Data Science with R: Intermediate,R
+Data Science with R: Introduction,R
+Doing your PhD at the UFZ,Philosphy
+Good Scientific Practice (for doctoral researchers),Philosphy
+How to Teach in Higher Education – Teaching Skills for Doctoral Researchers (Basics),Skill
+Introduction to Bayesian Inference,R
+Introduction to Multivariate Statistics: Ordination and Clustering (online),R
+Introduction to Probability and Applied Statistics Using R,R
+Introduction to Probability and Applied Statistics Using R for Doctoral Researchers,R
+Introduction to R,R
+Introduction to Scientific Writing,Skill
+Introduction to the Philosophy of Science,Philosphy
+Me and my supervisor,Skill
+Performing Biodiversity data analysis in R,R
+Version Control with Git,IT
+"Writing a good cover letter for journal submissions		 ",Skill
+yDiv Welcome Week,Philosphy
+,Reasoning & Logic
+,Data Science
+,Doing PhD
+,Scientific Practice
+,Teaching Skills
+,Bayesian Inference
+,Multivariate Statistics
+,Probability
+,Scientific Writing
+,Me & Supervisor
+,Biodiversity Data Analysis
+,Version Control
+,Cover Letter
+,yDiv Welcome

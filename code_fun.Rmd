@@ -1,0 +1,87 @@
+---
+title: "code_fun"
+author: "Saneesh"
+date: "3/5/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# code challenges
+## exercise 1
+### data
+
+```{r message=FALSE}
+url <- ("https://raw.githubusercontent.com/genomicsclass/dagdata/master/inst/extdata/femaleMiceWeights.csv")
+femaleMiceWeights <- read.csv(url)
+```
+
+1. Read in the file femaleMiceWeights.csv and report the exact name of the column containing the weights. 
+
+```{r message=FALSE}
+library(tidyverse)
+femaleMiceWeights %>% select(Bodyweight)
+glimpse(femaleMiceWeights)
+```
+2. What is the entry in the 12th row and second column?
+*hint:slice()*
+
+```{r}
+femaleMiceWeights %>% select(Bodyweight) %>% slice(12)
+```
+3. Extract the weight column and report the weight of the mouse in the 11th row.
+```{r}
+femaleMiceWeights %>% select(Bodyweight, Diet) %>% slice(11)
+```
+
+4. How many mice are included in our dataset?
+```{r message=FALSE}
+femaleMiceWeights %>% nrow()
+```
+
+5. To create a vector with the numbers 3 to 7, we can use seq(3,7) or, because they are consecutive, 3:7. View the data and determine what rows are associated with the high fat or hf diet. Then use the mean() function to compute the average weight of these mice.
+
+What is the average weight of mice on the high fat diet?
+
+```{r message=FALSE}
+femaleMiceWeights %>% select (Diet, Bodyweight) %>% filter(Diet=='hf') %>% summarise(ave.weight=mean(Bodyweight))
+```
+One of the functions we will be using often is sample_n(). Read the help file for sample_n() using ?sample. Now take a random sample of size 1 from the numbers 13 to 24 and report back the weight of the mouse represented by that row. Make sure to type set.seed(1) to ensure that everybody gets the same answer.
+```{r message=FALSE}
+set.seed(1)
+femaleMiceWeights %>% slice(13:24) %>%  sample_n(1)
+```
+
+
+
+
+```{r message=FALSE}
+url1 <- ("https://raw.githubusercontent.com/genomicsclass/dagdata/master/inst/extdata/msleep_ggplot2.csv")
+msleep_ggplot2 <- read.csv(url1)
+glimpse(msleep)
+```
+
+Now use the filter() function to select only the primates.
+
+How many animals in the table are primates?
+
+Hint: the nrow() function gives you the number of rows of a data frame or matrix.
+```{r}
+
+
+
+msleep_ggplot2 %>% filter(order=='Primates') %>% nrow()
+```
+
+
+Now we want to calculate the average amount of sleep for primates (the average of the numbers computed above). One challenge is that the mean() function requires a vector so, if we simply apply it to the output above, we get an error. Look at the help file for unlist() and use it to compute the desired average. 
+
+```{r}
+msleep_ggplot2 %>% filter(order=='Primates') %>% summarise(mean(sleep_total))
+```
+
+
+
+
